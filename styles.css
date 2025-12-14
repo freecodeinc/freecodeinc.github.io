@@ -1,0 +1,374 @@
+body {
+    background-color: #000000;
+    overflow-x: hidden;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+nav {
+    background-color: #ffffff;
+    width: 100vw;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    z-index: 20;
+    position: fixed;
+    top: 0
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#icon {
+    margin-left: 70px;
+    margin-right: 40px;
+}
+
+.header-text {
+    position: absolute;
+    right: 140px;
+    display: flex;
+    gap: 50px;
+}
+
+.header-text a span {
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.horizontal {
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    transition: all 0.3s ease-in-out; /* Smooth transition for layout change */
+}
+
+/* New class to handle the stacked layout */
+.horizontal.stacked {
+    flex-direction: column;
+    gap: 30px; /* Adjust gap for vertical stacking */
+    align-items: flex-start; /* Keep logo left-aligned when stacked */
+}
+
+.horizontal.stacked .typewriter-container {
+    width: 100%; /* Allow text to use the full width of its parent when stacked */
+}
+
+
+.main-logo {
+    flex-shrink: 0; /* Prevents logo from shrinking */
+}
+
+.typewriter-container {
+    position: relative;
+    width: 70%;
+}
+
+.typewriter-placeholder {
+    line-height: 1.15;
+    font-weight: bold;
+    font-size: 65px;
+    visibility: hidden; /* Takes up space but is not visible */
+}
+
+.typewriter-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: inline-block;
+    line-height: 1.15;
+    font-weight: bold;
+    font-size: 65px;
+}
+
+#signup-container {
+    color: #ffffff;
+    margin-left: 50%;
+    position: absolute;
+    top: 50%;
+    left: -25%;
+    width: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#signup-button {
+    margin-top: 30px;
+    background-color: #ffffff;
+    border: 2px solid white;
+    width: 500px;
+    height: 100px;
+    text-align: left;
+    padding-left: 30px;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 36px;
+    font-weight: bold;
+    box-shadow: inset 0 0 0 0 #000000;
+    transition: ease-in 0.3s;
+}
+
+#signup-button span {
+    mix-blend-mode: difference;
+    color: #ffffff
+}
+
+#signup-button:hover {
+    box-shadow: inset 600px 0 0 0 #000000;
+    cursor: pointer;
+}
+
+/* --- Hamburger Menu & Mobile Nav --- */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 70px;
+    z-index: 1001;
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 30px;
+    height: 4px;
+    margin: 5px auto;
+    background-color: #000;
+}
+
+/* Hamburger open state: morph bars into an X */
+.hamburger-menu {
+    width: 40px;
+    height: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+}
+
+.hamburger-menu .bar {
+    transition: transform 0.25s cubic-bezier(.2,.9,.2,1), opacity 0.2s ease;
+    transform-origin: center;
+}
+
+.hamburger-menu.open .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.mobile-nav {
+    display: flex; /* keep flex so transitions work */
+    position: fixed;
+    top: 80px; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 19;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.32s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+.mobile-nav.open {
+    max-height: 480px; /* Allow menu to expand smoothly */
+    visibility: visible;
+}
+
+/* When closing, keep the element visible while max-height/opacity animate,
+   then JS will remove the class and hide it after transitionend. */
+.mobile-nav.closing {
+    visibility: visible;
+    max-height: 0;
+}
+
+.mobile-nav a {
+    padding: 15px;
+    font-size: 27px;
+    width: 100%;
+    text-align: left;
+}
+
+/* --- About Page Styling --- */
+#big-text {
+    color: #ffffff;
+    margin-top: 140px;
+    padding: 80px 0;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+}
+
+#text-body {
+    max-width: 1000px;
+    width: 100%;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+#text-body h1 {
+    font-size: 65px;
+    font-weight: bold;
+    margin: 0 0 60px 0;
+    line-height: 1.2;
+    position: static !important;
+    display: block !important;
+}
+
+.about-text {
+    font-size: 24px;
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    margin: 0 0 60px 0;
+    text-align: left;
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 60px;
+}
+
+/* --- Media Query for Responsiveness --- */
+@media (max-width: 1100px) {
+    /* Shared left offset for stacked content */
+    :root {
+        --content-offset: 50px;
+    }
+
+    /* Hide the svg logo and show the brand text on mobile */
+    #icon {
+        display: none; /* Hide logo icon on mobile */
+    }
+
+    .header-text {
+        display: none; /* Hide desktop nav links */
+    }
+
+    .navbar-brand-text {
+        display: block; /* Show brand text on mobile */
+        position: relative;
+        margin-left: var(--content-offset);
+    }
+
+    .hamburger-menu {
+        display: block; /* Show hamburger icon */
+        right: 20px;
+    }
+
+    /* Make the typewriter text smaller on mobile so it fits better */
+    .typewriter-text,
+    .typewriter-placeholder {
+        font-size: 36px;
+        line-height: 1.08;
+    }
+
+    /* Stack the logo above the text on mobile and keep left-aligned */
+    .horizontal {
+        flex-direction: column;
+        gap: 20px; /* spacing between logo and text */
+        align-items: flex-start; /* left-align logo and text */
+        margin-left: var(--content-offset); /* match navbar brand */
+        width: calc(100% - var(--content-offset) - 20px);
+    }
+
+    .typewriter-container {
+        width: 100%; /* allow text to use full available width when stacked */
+    }
+
+    /* Center and space mobile nav items for a clearer menu */
+    .mobile-nav {
+        padding: 18px 0;
+        align-items: center; /* center children horizontally */
+    }
+
+    .mobile-nav a {
+        padding: 18px 0; /* more vertical spacing between items */
+        font-size: 20px; /* smaller text on mobile */
+        width: 90%;
+        max-width: 480px;
+        text-align: center; /* center-align the labels */
+        margin: 6px 0; /* small gap between links */
+        display: block;
+    }
+
+    /* Make signup button more proportional on smaller screens and align with left offset */
+    #signup-button {
+        width: calc(100vw - (var(--content-offset) * 2)); /* responsive to viewport width minus left/right offsets */
+        height: 80px;
+        font-size: 28px;
+        margin-top: 26px;
+        align-self: flex-start; /* align to container's left edge */
+        margin-left: var(--content-offset); /* match the left offset used for the stacked logo/text */
+        margin-right: var(--content-offset); /* symmetric right margin */
+    }
+
+    /* Make the signup container span full width on mobile so left offsets align with viewport */
+    #signup-container {
+        position: relative;
+        left: 0;
+        top: 300px;
+        transform: none;
+        margin-left: 0;
+        width: 100%;
+        padding-top: 36px; /* provide breathing room above the signup button */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* About page mobile styles */
+    #big-text {
+        padding: 40px 0;
+        margin-top: 140px;
+    }
+
+    #text-body {
+        padding: 0 30px;
+    }
+
+    #text-body h1 {
+        font-size: 42px;
+        margin-bottom: 40px;
+    }
+
+    .about-text {
+        font-size: 18px;
+        line-height: 1.7;
+        margin-bottom: 40px;
+    }
+
+    .about-img {
+        margin-bottom: 40px;
+    }
+}
