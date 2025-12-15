@@ -21,7 +21,7 @@ nav {
     align-items: center;
     z-index: 20;
     position: fixed;
-    top: 0
+    top: 0;
 }
 
 a {
@@ -93,12 +93,12 @@ a {
 
 #signup-container {
     color: #ffffff;
+    position: relative; 
+    margin-top: 300px;
+    margin-bottom: 50px;
     margin-left: 50%;
-    position: absolute;
-    top: 50%;
     left: -25%;
     width: 50%;
-    transform: translate(0, -50%);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -337,7 +337,11 @@ a {
     #signup-container {
         position: relative;
         left: 0;
-        top: 300px;
+        
+        /* UPDATED: Replaced fixed 'top' with margin-top */
+        margin-top: 140px; /* 120px nav + 20px gap */
+        top: auto; 
+        
         transform: none;
         margin-left: 0;
         width: 100%;
